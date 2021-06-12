@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AirlineJKMobile">
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AirlineJKMobile.NoActionBar">
-
-        </activity>
+        <activity android:name=".SignInActivity2"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AirlineJKMobile.NoActionBar"></activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
