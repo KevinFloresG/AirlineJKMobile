@@ -3,20 +3,24 @@ package com.mobile.airlinejkmobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main_content.*
+import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout ,toolbar, R.string.open, R.string.close)
+        //setContentView(R.layout.activity_main)
+        setSupportActionBar(binding.content.toolbar)
+        val toggle = ActionBarDrawerToggle(this,
+            binding.drawerLayout , binding.content.toolbar,
+            R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
-        drawer_layout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
-        nav_menu.setNavigationItemSelectedListener(this)
     }
 }
