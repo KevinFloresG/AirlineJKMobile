@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile"
+        android:title="@string/Perfil" />
+    <item
+        android:id="@+id/flights"
+        android:title="@string/Vuelos" />
+    <item
+        android:id="@+id/reservations"
+        android:title="@string/Reservaciones" />
+    <item
+        android:id="@+id/checkIn"
+        android:title="@string/CheckIn" />
+</menu>

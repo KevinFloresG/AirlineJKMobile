@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">AirlineJKMobile</string>
+    <string name="app_name">Airline JK</string>
+    <string name="Vuelos">Vuelos</string>
+    <string name="Perfil">Perfil</string>
+    <string name="Reservaciones">Reservaciones</string>
+    <string name="CheckIn">Check In</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>
