@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/runConfigurations.xml
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/vcs.xml
+gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew
+gradlew.bat
+gradlew
