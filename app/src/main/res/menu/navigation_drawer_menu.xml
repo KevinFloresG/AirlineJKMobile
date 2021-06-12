@@ -5,6 +5,9 @@
         android:id="@+id/profile"
         android:title="@string/Perfil" />
     <item
+        android:id="@+id/flights_offer"
+        android:title="@string/vuelos_en_oferta" />
+    <item
         android:id="@+id/flights"
         android:title="@string/Vuelos" />
     <item

@@ -7,4 +7,8 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="sign_in">Sign In</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="flights_offer_frag">Flights Offer Frag</string>
+    <string name="vuelos_en_oferta">Vuelos en Oferta</string>
 </resources>

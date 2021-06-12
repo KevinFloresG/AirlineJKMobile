@@ -2,10 +2,14 @@ package com.mobile.airlinejkmobile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding : ActivityMainBinding
 
@@ -21,5 +25,28 @@ class MainActivity : AppCompatActivity() {
         toggle.isDrawerIndicatorEnabled = true
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        binding.navMenu.setNavigationItemSelectedListener(this)
+        changeFragment("Vuelos en Oferta", FlightsOfferFragment())
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        when(item.itemId){
+            R.id.profile -> changeFragment("Perfil", ProfileFragment())
+            R.id.flights_offer -> changeFragment("Vuelos en Oferta", FlightsOfferFragment())
+            R.id.flights -> changeFragment("Vuelos", FlightsFragment())
+            R.id.reservations ->changeFragment("Reservaciones", ReservationsFragment())
+            R.id.checkIn -> changeFragment("Check In", CheckInFragment())
+            else -> return false
+        }
+        return true
+    }
+
+    private fun changeFragment(title : String, frag : Fragment){
+        supportActionBar?.title = title
+        val fragment = supportFragmentManager.beginTransaction()
+        fragment.replace(R.id.fragment_container, frag).commit()
+    }
+
 }
