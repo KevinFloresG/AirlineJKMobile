@@ -6,4 +6,5 @@
     <string name="CheckIn">Check In</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="sign_in">Sign In</string>
 </resources>

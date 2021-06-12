@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AirlineJKMobile">
+        <activity android:name=".SignInActivity2" />
         <activity android:name=".MainActivity" android:theme="@style/Theme.AirlineJKMobile.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
