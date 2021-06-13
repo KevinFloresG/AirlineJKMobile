@@ -101,8 +101,7 @@
                 android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:autofillHints="" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -138,11 +137,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center_horizontal"
-                android:hint="Apellido 1"
+                android:hint="@string/apellido_1_val"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:autofillHints="" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -162,7 +160,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
                 android:layout_weight="1"
-                android:text="Apellido 2:"
+                android:text="@string/apellido_2"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -178,7 +176,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center_horizontal"
-                android:hint="Apellido 2"
+                android:hint="@string/apellido_2_val"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
@@ -197,7 +195,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
                 android:layout_weight="1"
-                android:text="Email:"
+                android:text="@string/emailL"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -237,7 +235,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
                 android:layout_weight="1"
-                android:text="Fecha de N:"
+                android:text="@string/fecha_de_n"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
