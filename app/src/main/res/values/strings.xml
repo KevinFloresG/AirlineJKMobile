@@ -30,4 +30,9 @@
     <string name="username">Username</string>
     <string name="passwordL">Password:</string>
     <string name="confirm_passwordL">Confirm Password:</string>
+    <string name="apellido_1_val">Apellido 1</string>
+    <string name="apellido_2">Apellido 2:</string>
+    <string name="apellido_2_val">Apellido 2</string>
+    <string name="emailL">Email:</string>
+    <string name="fecha_de_n">Fecha de N:</string>
 </resources>
