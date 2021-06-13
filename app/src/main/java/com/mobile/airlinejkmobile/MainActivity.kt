@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
 import com.mobile.airlinejkmobile.fragments.*
-import com.mobile.airlinejkmobile.recycler_views.recyclers.RecyclerTryFragment
+import com.mobile.airlinejkmobile.recycler_views.recyclers.FlightsRecyclerFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //=============== TRY RECYCLER ========================
         //val fragment : Fragment = RecyclerTryFragment.newInstance()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, RecyclerTryFragment(),"recycler").commit()
+        transaction.replace(R.id.fragment_container, FlightsRecyclerFragment(),"recycler").commit()
         //=====================================================
     }
 

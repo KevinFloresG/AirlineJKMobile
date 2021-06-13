@@ -5,8 +5,14 @@ import java.util.ArrayList
 object Model {
 
     var usersList = ArrayList<User>()
+    var flightsList = ArrayList<Flight>()
 
     init {
+        flightsList.add(Flight("A","","2 horas", 3300.0))
+        flightsList.add(Flight("B","","2 horas", 3300.0))
+        flightsList.add(Flight("C","","2 horas", 3300.0))
+        flightsList.add(Flight("ABC","","2 horas", 3300.0))
+
         usersList.add(User("java123", "123", "Javier","Amador","Delgado",
             "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
 

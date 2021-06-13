@@ -30,4 +30,5 @@
     <string name="username">Username</string>
     <string name="passwordL">Password:</string>
     <string name="confirm_passwordL">Confirm Password:</string>
+    <string name="b_squeda">Búsqueda</string>
 </resources>
