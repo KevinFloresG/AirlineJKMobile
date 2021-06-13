@@ -27,7 +27,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         binding.navMenu.setNavigationItemSelectedListener(this)
-        changeFragment("Vuelos en Oferta", FlightsOfferFragment())
+
+        //changeFragment("Vuelos en Oferta", FlightsOfferFragment())*/
+
+        //=============== TRY RECYCLER ========================
+        //val fragment : Fragment = RecyclerTryFragment.newInstance()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, RecyclerTryFragment(),"recycler").commit()
+        //=====================================================
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

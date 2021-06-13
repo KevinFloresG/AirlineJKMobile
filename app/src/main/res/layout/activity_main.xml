@@ -19,6 +19,12 @@
         app:menu="@menu/navigation_drawer_menu"
         android:id="@+id/nav_menu"
         android:layout_gravity="start"
-        />
+        /> <!--
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        />-->
 
 </androidx.drawerlayout.widget.DrawerLayout>
