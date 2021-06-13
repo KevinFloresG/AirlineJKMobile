@@ -1,4 +1,4 @@
-package com.mobile.airlinejkmobile
+package com.mobile.airlinejkmobile.recycler_views.recyclers
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mobile.airlinejkmobile.business_logic.Car
+import com.mobile.airlinejkmobile.fragments.DetailCarFragment
+import com.mobile.airlinejkmobile.R
+import com.mobile.airlinejkmobile.recycler_views.recycler_adapters.RecyclerViewCarAdapter
 
 class RecyclerTryFragment : Fragment(), RecyclerViewCarAdapter.ClickListener {
 

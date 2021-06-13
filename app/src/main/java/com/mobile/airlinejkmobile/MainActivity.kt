@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
+import com.mobile.airlinejkmobile.fragments.*
+import com.mobile.airlinejkmobile.recycler_views.recyclers.RecyclerTryFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

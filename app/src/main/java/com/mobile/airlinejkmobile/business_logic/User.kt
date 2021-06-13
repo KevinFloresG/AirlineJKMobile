@@ -1,4 +1,4 @@
-package bLogic
+package com.mobile.airlinejkmobile.business_logic
 
 import java.io.Serializable
 

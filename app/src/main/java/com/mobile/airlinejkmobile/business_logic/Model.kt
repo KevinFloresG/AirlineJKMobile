@@ -1,6 +1,5 @@
-package com.mobile.airlinejkmobile
+package com.mobile.airlinejkmobile.business_logic
 
-import bLogic.User
 import java.util.ArrayList
 
 object Model {
