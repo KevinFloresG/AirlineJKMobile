@@ -38,6 +38,14 @@ object Model {
         return null
     }
 
+    fun getUserByUsername(username: String?): User? {
+        for(u: User in usersList!!){
+            if(u.username == username){
+                return u
+            }
+        }
+        return null
+    }
 
 
 }

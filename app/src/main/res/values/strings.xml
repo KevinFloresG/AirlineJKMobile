@@ -21,4 +21,13 @@
     <string name="iNombre">Nombre:</string>
     <string name="name">Name</string>
     <string name="apellido_1">Apellido 1:</string>
+    <string name="locationL">Dirección:</string>
+    <string name="location">Dirección</string>
+    <string name="phoneL">Teléfono:</string>
+    <string name="phonePattern">XXXX-XXXX</string>
+    <string name="cellphoneL">Celular:</string>
+    <string name="usernameL">Username:</string>
+    <string name="username">Username</string>
+    <string name="passwordL">Password:</string>
+    <string name="confirm_passwordL">Confirm Password:</string>
 </resources>

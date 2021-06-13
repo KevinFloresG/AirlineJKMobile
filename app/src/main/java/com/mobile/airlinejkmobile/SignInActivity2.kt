@@ -1,8 +1,13 @@
 package com.mobile.airlinejkmobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
+import com.mobile.airlinejkmobile.business_logic.Model
+import com.mobile.airlinejkmobile.business_logic.User
 import com.mobile.airlinejkmobile.databinding.ActivitySignIn2Binding
 
 
@@ -20,13 +25,60 @@ class SignInActivity2 : AppCompatActivity() {
         val bundle = intent.extras
         val name = bundle?.getString("Name")
         val lastName = bundle?.getString("LastName1")
-        //val lastName2 = bundle?.getString("LastName2")
-        //val email = bundle?.getString("Email")
+        val lastName2 = bundle?.getString("LastName2")
+        val email = bundle?.getString("Email")
         val dateOfBirth = bundle?.getString("DateOfBirth")
 
-        Toast.makeText(this, "$name-$lastName-$dateOfBirth", Toast.LENGTH_LONG).show()
+        val btn = binding.signInBtn
 
-        //val btn = binding
+        btn.setOnClickListener(View.OnClickListener {
+
+
+            val location = binding.iLocation.text.toString()
+            val username = binding.iUsername.text.toString()
+            val telephone = binding.iPhone.text.toString()
+            val cellphone = binding.iCellphone.text.toString()
+            val password = binding.iPassword.text.toString()
+            val cPassword = binding.iCPassword.text.toString()
+
+            if(location == ""|| username == "" || telephone == "" || cellphone == "" || password == "" || cPassword == "") {
+                Toast.makeText(
+                    this,
+                    "Debe llenar todos los campos completar el registro.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@OnClickListener
+            }
+
+            val userExists = Model.getUserByUsername(username)
+
+            if(userExists != null){
+                Toast.makeText(
+                    this,
+                    "El username seleccionado ya existe. Indique otro.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@OnClickListener
+            }
+
+            if(password != cPassword){
+                Toast.makeText(
+                    this,
+                    "Advertencia: Las contraseñas no coinciden.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@OnClickListener
+            }
+
+            val i = Intent(this, LoginActivity::class.java)
+            i.putExtra("msg", "Se ha registrado con exito.")
+            val userToRegister = User(username,password,name!!,
+                lastName!!,lastName2!!,email!!,dateOfBirth!!,location,telephone,cellphone,0)
+            Model.addUser(userToRegister)
+            val userToTest = Model.getUserByUsername(username)
+            startActivity(i)
+        })
+
 
     }
 }
