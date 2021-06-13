@@ -3,10 +3,12 @@ package com.mobile.airlinejkmobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.mobile.airlinejkmobile.business_logic.User
 import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
 import com.mobile.airlinejkmobile.fragments.*
 import com.mobile.airlinejkmobile.recycler_views.recyclers.RecyclerTryFragment
@@ -19,6 +21,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        val user =  bundle!!.getSerializable("User") as User
+
+        Toast.makeText(
+            this,
+            "Bienvenid@ "+user.name+" "+user.lastName+".",
+            Toast.LENGTH_SHORT
+        ).show()
 
         setSupportActionBar(binding.content.toolbar)
         val toggle = ActionBarDrawerToggle(this,
