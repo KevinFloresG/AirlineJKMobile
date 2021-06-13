@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2F9F9B"
     tools:context=".SignInActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#706b7d"
+        android:background="#2F9F9B"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="146dp"
         tools:layout_editor_absoluteY="408dp">
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#00FFFFFF"
-            android:contentDescription="Logo"
+            android:contentDescription="@string/logo"
             android:src="@mipmap/ic_plane_foreground" />
 
         <TextView
@@ -32,12 +33,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="145dp"
+            android:layout_marginLeft="145dp"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:layout_marginLeft="145dp" />
+            android:textSize="22sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -48,12 +49,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
+            android:layout_marginLeft="150dp"
             android:fontFamily="serif"
             android:gravity="center"
-            android:text="@string/sign_in"
+            android:text="@string/sign_in_title"
             android:textColor="#FBFAFA"
-            android:textSize="30sp"
-            android:layout_marginLeft="150dp" />
+            android:textSize="30sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -79,11 +80,11 @@
                 android:layout_width="92dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_weight="1"
-                android:text="Nombre:"
+                android:text="@string/iNombre"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginLeft="60dp" />
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="59dp"
@@ -91,16 +92,17 @@
                 android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/iUsername"
+                android:id="@+id/iName"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Name"
+                android:gravity="center_horizontal"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:autofillHints="" />
 
         </LinearLayout>
 
@@ -118,11 +120,11 @@
                 android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_weight="1"
-                android:text="Apellido 1:"
+                android:text="@string/apellido_1"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginLeft="60dp" />
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="59dp"
@@ -130,16 +132,17 @@
                 android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/iPassword"
+                android:id="@+id/iLastName1"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:gravity="center_horizontal"
                 android:hint="Apellido 1"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:autofillHints="" />
 
         </LinearLayout>
 
@@ -157,11 +160,11 @@
                 android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_weight="1"
                 android:text="Apellido 2:"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginLeft="60dp" />
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="59dp"
@@ -169,16 +172,16 @@
                 android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/confirmPassword"
+                android:id="@+id/iLastName2"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:gravity="center_horizontal"
                 android:hint="Apellido 2"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -192,11 +195,11 @@
                 android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_weight="1"
                 android:text="Email:"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginLeft="60dp" />
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="59dp"
@@ -204,16 +207,16 @@
                 android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/iEmail"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:gravity="center_horizontal"
                 android:hint="example@email.com"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -232,11 +235,11 @@
                 android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_weight="1"
                 android:text="Fecha de N:"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginLeft="60dp" />
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -247,9 +250,9 @@
 
 
         <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="128dp"
+            android:id="@+id/iDatePicker"
+            android:layout_width="269dp"
+            android:layout_height="92dp"
             android:layout_gravity="center"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
@@ -261,11 +264,11 @@
 
 
         <Button
-            android:id="@+id/signIn"
+            android:id="@+id/ctnBtn"
             android:layout_width="200dp"
             android:layout_height="47dp"
             android:layout_gravity="center"
-            android:text="Continuar"
+            android:text="@string/continuar"
             app:backgroundTint="#2B289C" />
 
 
