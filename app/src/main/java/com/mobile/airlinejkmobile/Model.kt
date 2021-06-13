@@ -1,0 +1,44 @@
+package com.mobile.airlinejkmobile
+
+import bLogic.User
+import java.util.ArrayList
+
+object Model {
+
+    var usersList = ArrayList<User>()
+
+    init {
+        usersList.add(User("java123", "123", "Javier","Amador","Delgado",
+            "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
+
+        usersList.add(User("kevfg", "321", "Kevin","Flores","Garcia",
+            "kevfg@gmail.com", "1999-02-19","Puntarenas","2154-2465","8312-7534",0))
+
+        usersList.add(User("albert1", "111111", "Alberto","Achio","Morales",
+            "aacmora@gmail.com", "1990-04-24","Guanacaste","2356-0142","6242-2634",0))
+
+        usersList.add(User("ngray", "00000", "Nolan","Grayson","N/A",
+            "naminmo@gmail.com", "1970-07-03","","4356-0142","6242-2634",0))
+
+    }
+
+    fun getUsers(): ArrayList<User> {
+        return usersList
+    }
+
+    fun addUser(s : User){
+        usersList.add(s)
+    }
+
+    fun login(username: String?, password: String?): User? {
+        for(u: User in usersList!!){
+            if(u.username == username && u.password == password && u.isAdmin == 0){
+                return u
+            }
+        }
+        return null
+    }
+
+
+
+}
