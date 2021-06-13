@@ -70,18 +70,13 @@ class SignInActivity2 : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            val i = Intent(this, SignInActivity2::class.java)
+            val i = Intent(this, LoginActivity::class.java)
             i.putExtra("msg", "Se ha registrado con exito.")
             val userToRegister = User(username,password,name!!,
                 lastName!!,lastName2!!,email!!,dateOfBirth!!,location,telephone,cellphone,0)
             Model.addUser(userToRegister)
             val userToTest = Model.getUserByUsername(username)
-            var txt = "Hell no"
-            if(userToTest != null)
-                txt = "Yeah boy"
-            Log.d("Hmmm",txt)
             startActivity(i)
-
         })
 
 

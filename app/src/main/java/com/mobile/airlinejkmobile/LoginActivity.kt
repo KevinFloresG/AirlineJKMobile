@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.mobile.airlinejkmobile.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val btn = binding.registerBtn
 
         btn.setOnClickListener(View.OnClickListener {
@@ -24,5 +26,12 @@ class LoginActivity : AppCompatActivity() {
                 )
             )
         })
+
+        val bundle = intent.extras
+        val msg = bundle?.getString("msg")
+        if (msg != null) {
+            Toast.makeText(this, "$msg", Toast.LENGTH_LONG).show()
+        }
+
     }
 }
