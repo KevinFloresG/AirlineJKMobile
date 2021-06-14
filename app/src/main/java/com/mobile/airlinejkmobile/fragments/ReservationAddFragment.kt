@@ -1,6 +1,7 @@
 package com.mobile.airlinejkmobile.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ private const val AVAILABLE_SEATS = "availableSeats"
 
 class ReservationAddFragment : Fragment() {
 
-    private var idFlight : Int = null
+    private var idFlight : Int? = null
     private var start: String? = null
     private var end: String? = null
     private var duration: String? = null
@@ -74,7 +75,8 @@ class ReservationAddFragment : Fragment() {
 
     private fun addReservation(view: View){
         val cantSeats = view.findViewById<TextView>(R.id.cantSeats).text
-        if (cantSeats.isEmpty()){
+       Log.d("KKKK", "$cantSeats--")
+        if (cantSeats.isBlank()){
             Toast.makeText(context, "Ingresa una Cant. de Asientos", Toast.LENGTH_SHORT).show()
         }else {
             val cantInt = cantSeats.toString().toInt()

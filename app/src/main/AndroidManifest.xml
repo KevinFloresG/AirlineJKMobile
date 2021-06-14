@@ -11,15 +11,15 @@
         android:theme="@style/Theme.AirlineJKMobile">
         <activity android:name=".SignInActivity2" />
         <activity android:name=".MainActivity" android:theme="@style/Theme.AirlineJKMobile.NoActionBar">
+
+        </activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".LoginActivity">
-
         </activity>
     </application>
 

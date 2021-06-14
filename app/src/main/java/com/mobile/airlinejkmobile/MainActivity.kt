@@ -1,8 +1,5 @@
 package com.mobile.airlinejkmobile
 
-
-
-import android.R.attr.key
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -19,7 +16,6 @@ import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
 import com.mobile.airlinejkmobile.databinding.NavigationDrawerHeaderBinding
 import com.mobile.airlinejkmobile.fragments.*
 import com.mobile.airlinejkmobile.recycler_views.recyclers.FlightsRecyclerFragment
-
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
