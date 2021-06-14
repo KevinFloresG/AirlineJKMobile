@@ -11,6 +11,9 @@ object Model {
     var reservationId = 0
     var reservations = ArrayList<Reservation>()
 
+
+    var flightsList = ArrayList<Flight>()
+    var currentUser:User? = null
     init {
         flights[0] = Flight(0,"CRC","USA","3 horas", 700.0, 0.0, 35, "13/06/2021", "13:00")
         flights[1] = Flight(1,"USA","CRC","3 horas", 700.0, 0.0, 35, "21/06/2021", "14:00")
@@ -27,6 +30,9 @@ object Model {
         flights[12] = Flight(12,"SRB","QAT","4 horas", 500.0, 0.0, 35, "19/06/2021", "22:00")
         flights[13] = Flight(13,"SGP","ARG","5 horas", 500.0, 0.0, 35, "25/06/2021", "13:00")
 
+        usersList.add(User("1", "1", "Javier","Amador","Delgado",
+            "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
+
         usersList.add(User("java123", "123", "Javier","Amador","Delgado",
             "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
 
@@ -38,7 +44,6 @@ object Model {
 
         usersList.add(User("ngray", "00000", "Nolan","Grayson","N/A",
             "naminmo@gmail.com", "1970-07-03","","4356-0142","6242-2634",0))
-
 
     }
 
@@ -67,5 +72,19 @@ object Model {
         }
         return null
     }
+
+    fun updateUserInfo(user: User){
+        for(u: User in usersList!!){
+            if(u.username == user.username){
+                u.email = user.email
+                u.address = user.address
+                u.workphone = user.workphone
+                u.cellphone = user.cellphone
+
+            }
+        }
+    }
+
+
 
 }
