@@ -3,17 +3,26 @@
 
     <item
         android:id="@+id/profile"
+        android:icon="@drawable/ic_action_profile"
         android:title="@string/Perfil" />
     <item
         android:id="@+id/flights_offer"
+        android:icon="@drawable/ic_action_flight_discount"
         android:title="@string/vuelos_en_oferta" />
     <item
         android:id="@+id/flights"
+        android:icon="@drawable/ic_action_flight"
         android:title="@string/Vuelos" />
     <item
         android:id="@+id/reservations"
+        android:icon="@drawable/ic_action_reservations"
         android:title="@string/Reservaciones" />
     <item
         android:id="@+id/checkIn"
+        android:icon="@drawable/ic_action_check_in"
         android:title="@string/CheckIn" />
+    <item
+        android:id="@+id/logOut"
+        android:icon="@drawable/ic_action_log_out"
+        android:title="@string/log_out" />
 </menu>
