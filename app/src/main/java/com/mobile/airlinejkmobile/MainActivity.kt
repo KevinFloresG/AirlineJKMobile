@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        /*
         val bundle = intent.extras
         val user =  bundle!!.getSerializable("User") as User
 
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "Bienvenid@ "+user.name+" "+user.lastName+".",
             Toast.LENGTH_SHORT
         ).show()
+        */
 
         setSupportActionBar(binding.content.toolbar)
         val toggle = ActionBarDrawerToggle(this,
@@ -45,28 +46,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //=============== TRY RECYCLER ========================
         //val fragment : Fragment = RecyclerTryFragment.newInstance()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, FlightsRecyclerFragment(),"recycler").commit()
+        //val transaction = supportFragmentManager.beginTransaction()
+        //transaction.replace(R.id.fragment_container, FlightsRecyclerFragment(),"recycler").commit()
         //=====================================================
+
+        changeFragment("Vuelos", FlightsRecyclerFragment(), "recycler_flights")
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         when(item.itemId){
-            R.id.profile -> changeFragment("Perfil", ProfileFragment())
-            R.id.flights_offer -> changeFragment("Vuelos en Oferta", FlightsOfferFragment())
-            R.id.flights -> changeFragment("Vuelos", FlightsFragment())
-            R.id.reservations ->changeFragment("Reservaciones", ReservationsFragment())
-            R.id.checkIn -> changeFragment("Check In", CheckInFragment())
+            R.id.profile -> changeFragment("Perfil", ProfileFragment(), "")
+            R.id.flights_offer -> changeFragment("Vuelos en Oferta", FlightsOfferFragment(),"")
+            R.id.flights -> changeFragment("Vuelos", FlightsRecyclerFragment(), "recycler_flights")
+            R.id.reservations ->changeFragment("Reservaciones", ReservationsFragment(),"")
+            R.id.checkIn -> changeFragment("Check In", CheckInFragment(),"")
             else -> return false
         }
         return true
     }
 
-    private fun changeFragment(title : String, frag : Fragment){
+    private fun changeFragment(title : String, frag : Fragment, tag : String){
         supportActionBar?.title = title
         val fragment = supportFragmentManager.beginTransaction()
-        fragment.replace(R.id.fragment_container, frag).commit()
+        if (tag.isEmpty())
+            fragment.replace(R.id.fragment_container, frag)
+        else
+            fragment.replace(R.id.fragment_container, frag, tag)
+        fragment.commit()
     }
 
 }

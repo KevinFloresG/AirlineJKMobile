@@ -5,13 +5,27 @@ import java.util.ArrayList
 object Model {
 
     var usersList = ArrayList<User>()
-    var flightsList = ArrayList<Flight>()
+    //var flightsList = ArrayList<Flight>()
+    var flights = HashMap<Int, Flight>()
+    //var reservations = HashMap<Int, Reservation>()
+    var reservationId = 0
+    var reservations = ArrayList<Reservation>()
 
     init {
-        flightsList.add(Flight("A","","2 horas", 3300.0))
-        flightsList.add(Flight("B","","2 horas", 3300.0))
-        flightsList.add(Flight("C","","2 horas", 3300.0))
-        flightsList.add(Flight("ABC","","2 horas", 3300.0))
+        flights[0] = Flight(0,"CRC","USA","3 horas", 700.0, 0.0, 35, "13/06/2021", "13:00")
+        flights[1] = Flight(1,"USA","CRC","3 horas", 700.0, 0.0, 35, "21/06/2021", "14:00")
+        flights[2] = Flight(2,"ARG","CAN","4 horas", 300.0, 0.0, 35, "13/06/2021", "10:00")
+        flights[3] = Flight(3,"CAN","CHL","4 horas", 400.0, 0.0, 35, "22/06/2021", "13:00")
+        flights[4] = Flight(4,"CHL","CRC","2 horas", 200.0, 0.0, 35, "13/06/2021", "09:00")
+        flights[5] = Flight(5,"CRC","CHN","26 horas", 2000.0, 0.0, 35, "13/06/2021", "16:00")
+        flights[6] = Flight(6,"CHN","PER","25 horas", 2000.0, 0.0, 35, "14/06/2021", "17:00")
+        flights[7] = Flight(7,"PER","POL","8 horas", 600.0, 0.0, 35,"15/06/2021", "13:00")
+        flights[8] = Flight(8,"POL","PRI","8 horas", 600.0, 0.0, 35, "16/06/2021", "10:00")
+        flights[9] = Flight(9,"PRI","RUS","10 horas", 1000.0, 0.0, 35, "17/06/2021", "13:00")
+        flights[10] = Flight(10,"QAT","RUS","1 horas", 100.0, 0.0, 35, "13/06/2021", "21:00")
+        flights[11] = Flight(11,"RUS","CRC","10 horas", 1000.0, 0.0, 35, "18/06/2021", "13:00")
+        flights[12] = Flight(12,"SRB","QAT","4 horas", 500.0, 0.0, 35, "19/06/2021", "22:00")
+        flights[13] = Flight(13,"SGP","ARG","5 horas", 500.0, 0.0, 35, "25/06/2021", "13:00")
 
         usersList.add(User("java123", "123", "Javier","Amador","Delgado",
             "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
@@ -25,6 +39,7 @@ object Model {
         usersList.add(User("ngray", "00000", "Nolan","Grayson","N/A",
             "naminmo@gmail.com", "1970-07-03","","4356-0142","6242-2634",0))
 
+
     }
 
     fun getUsers(): ArrayList<User> {
@@ -36,7 +51,7 @@ object Model {
     }
 
     fun login(username: String?, password: String?): User? {
-        for(u: User in usersList!!){
+        for(u: User in usersList){
             if(u.username == username && u.password == password && u.isAdmin == 0){
                 return u
             }
@@ -45,13 +60,12 @@ object Model {
     }
 
     fun getUserByUsername(username: String?): User? {
-        for(u: User in usersList!!){
+        for(u: User in usersList){
             if(u.username == username){
                 return u
             }
         }
         return null
     }
-
 
 }

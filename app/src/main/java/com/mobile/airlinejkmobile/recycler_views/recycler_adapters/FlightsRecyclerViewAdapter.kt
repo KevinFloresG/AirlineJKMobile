@@ -24,8 +24,8 @@ class FlightsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val f = flights[position]
         holder.route.text = f.start + " - " + f.end
-        holder.duration.text = f.duration
-        holder.price.text = f.price.toString()
+        holder.duration.text = "Duración: " + f.duration
+        holder.price.text = "Precio: " + f.price.toString()
         holder.itemView.setOnClickListener {
             clickListener.onItemClick(f)
         }

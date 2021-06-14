@@ -15,12 +15,13 @@ import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Flight
 import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.fragments.FlightDetailFragment
+import com.mobile.airlinejkmobile.fragments.ReservationAddFragment
 import com.mobile.airlinejkmobile.recycler_views.recycler_adapters.FlightsRecyclerViewAdapter
 
 class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickListener {
 
     private lateinit var adapter: FlightsRecyclerViewAdapter
-    private val flights: ArrayList<Flight> = Model.flightsList
+    private val flights: ArrayList<Flight> = ArrayList(Model.flights.values)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,17 +52,23 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
+            ): Boolean { return false }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // poner el cambiar de fragment
+                displayDetailFragment(viewHolder)
             }
         }
-
         val swap = ItemTouchHelper(itemSwipe)
         swap.attachToRecyclerView(recycler)
+    }
+
+    private fun displayDetailFragment(viewHolder: RecyclerView.ViewHolder){
+        val fragment: Fragment = ReservationAddFragment.newInstance(flights[viewHolder.adapterPosition])
+        val transaction = activity?.supportFragmentManager!!.beginTransaction()
+        transaction.hide(activity?.supportFragmentManager!!.findFragmentByTag("recycler_flights")!!)
+        transaction.add(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun filter(string: String){
@@ -79,7 +86,7 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
     override fun onItemClick(flight: Flight) {
         val fragment: Fragment = FlightDetailFragment.newInstance(flight)
         val transaction = activity?.supportFragmentManager!!.beginTransaction()
-        transaction.hide(activity?.supportFragmentManager!!.findFragmentByTag("recycler")!!)
+        transaction.hide(activity?.supportFragmentManager!!.findFragmentByTag("recycler_flights")!!)
         transaction.add(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
