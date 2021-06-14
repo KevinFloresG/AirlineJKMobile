@@ -1,5 +1,6 @@
 package com.mobile.airlinejkmobile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.flights -> changeFragment("Vuelos", FlightsRecyclerFragment(), "recycler_flights")
             R.id.reservations ->changeFragment("Reservaciones", ReservationsFragment(),"")
             R.id.checkIn -> changeFragment("Check In", CheckInFragment(),"")
+            R.id.logOut -> logOut()
             else -> return false
         }
         return true
@@ -87,6 +89,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         else
             fragment.replace(R.id.fragment_container, frag, tag)
         fragment.commit()
+    }
+
+    private fun logOut(){
+        Model.currentUser = null
+        val i = Intent(this, LoginActivity::class.java)
+        i.putExtra("msg", "Se ha finalizado la sesión con éxito.")
+        startActivity(i)
     }
 
 }

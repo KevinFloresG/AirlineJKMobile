@@ -75,7 +75,6 @@ class SignInActivity2 : AppCompatActivity() {
             val userToRegister = User(username,password,name!!,
                 lastName!!,lastName2!!,email!!,dateOfBirth!!,location,telephone,cellphone,0)
             Model.addUser(userToRegister)
-            val userToTest = Model.getUserByUsername(username)
             startActivity(i)
         })
 
