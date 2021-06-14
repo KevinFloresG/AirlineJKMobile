@@ -69,6 +69,7 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
         transaction.add(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+        adapter.notifyItemChanged(viewHolder.adapterPosition)
     }
 
     private fun filter(string: String){

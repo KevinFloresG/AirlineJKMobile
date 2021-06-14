@@ -75,28 +75,27 @@ class ReservationAddFragment : Fragment() {
 
     private fun addReservation(view: View){
         val cantSeats = view.findViewById<TextView>(R.id.cantSeats).text
-       Log.d("KKKK", "$cantSeats--")
         if (cantSeats.isBlank()){
             Toast.makeText(context, "Ingresa una Cant. de Asientos", Toast.LENGTH_SHORT).show()
-        }else {
-            val cantInt = cantSeats.toString().toInt()
-            if (cantInt > availableSeats!!) {
-                Toast.makeText(context, "No hay tantos Asientos Disponibles!", Toast.LENGTH_SHORT).show()
-            }else{
-                if (cantInt <= 0)
-                    Toast.makeText(context, "Ingresa una Cant. de Asientos Correcta", Toast.LENGTH_SHORT).show()
-                else{
-                    var f = Model.flights[idFlight]!!
-                    /*
-                    Model.reservations.add(
-                        Reservation(++Model.reservationId, f, cantInt,
-                            User()
-                        )
-                    )*/
-                }
-            }
+            return
         }
-
+        val cantInt = cantSeats.toString().toInt()
+        if (cantInt > availableSeats!!) {
+            Toast.makeText(context, "No hay tantos Asientos Disponibles!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (cantInt <= 0){
+            Toast.makeText(context, "Ingresa una Cant. de Asientos Correcta", Toast.LENGTH_SHORT).show()
+            return
+        }
+        var f = Model.flights[idFlight]!!
+        var u = Model.currentUser!!
+        Model.reservations.add(
+            Reservation(++Model.reservationId, f, cantInt, 0, u, cantInt * price!!)
+        )
+        f.availableSeats -= cantInt
+        Toast.makeText(context, "Reservación Correcta", Toast.LENGTH_LONG).show()
+        activity?.onBackPressed()
     }
 
     companion object {
