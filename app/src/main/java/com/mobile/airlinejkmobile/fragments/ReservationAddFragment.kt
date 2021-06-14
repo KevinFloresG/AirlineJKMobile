@@ -94,7 +94,7 @@ class ReservationAddFragment : Fragment() {
             Reservation(++Model.reservationId, f, cantInt, 0, u, cantInt * price!!)
         )
         f.availableSeats -= cantInt
-        Toast.makeText(context, "Reservación Correcta", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Reservación realizada Correctamente", Toast.LENGTH_LONG).show()
         activity?.onBackPressed()
     }
 

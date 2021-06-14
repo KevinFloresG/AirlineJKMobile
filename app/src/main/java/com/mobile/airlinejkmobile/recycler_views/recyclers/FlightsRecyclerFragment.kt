@@ -92,4 +92,5 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
 }
