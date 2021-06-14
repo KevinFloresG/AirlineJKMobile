@@ -1,35 +1,53 @@
 package com.mobile.airlinejkmobile
 
-import androidx.appcompat.app.AppCompatActivity
+
+
+import android.R.attr.key
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.business_logic.User
 import com.mobile.airlinejkmobile.databinding.ActivityMainBinding
+import com.mobile.airlinejkmobile.databinding.NavigationDrawerHeaderBinding
 import com.mobile.airlinejkmobile.fragments.*
 import com.mobile.airlinejkmobile.recycler_views.recyclers.FlightsRecyclerFragment
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding : ActivityMainBinding
+    private lateinit var binding2 : NavigationDrawerHeaderBinding
+    private lateinit var user : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val bundle = intent.extras
+        user =  bundle!!.getSerializable("User") as User
+        Model.currentUser = user
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding2 = NavigationDrawerHeaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bundle = intent.extras
-        val user =  bundle!!.getSerializable("User") as User
 
+        // Show Welcome Message to User
         Toast.makeText(
             this,
             "Bienvenid@ "+user.name+" "+user.lastName+".",
             Toast.LENGTH_SHORT
         ).show()
+
+        val cUserTxt = user.name +" "+user.lastName+" - "+user.email
+        val headerView: View  = binding.navMenu.getHeaderView(0)
+        val loggedUserTextView = headerView.findViewById(R.id.loggedUserLabel) as TextView
+        loggedUserTextView.text = cUserTxt
 
         setSupportActionBar(binding.content.toolbar)
         val toggle = ActionBarDrawerToggle(this,
@@ -48,6 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, FlightsRecyclerFragment(),"recycler").commit()
         //=====================================================
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -68,5 +87,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragment = supportFragmentManager.beginTransaction()
         fragment.replace(R.id.fragment_container, frag).commit()
     }
+
+/*    private fun changeToProfileFragment(title : String, frag : Fragment){
+        supportActionBar?.title = title
+*//*        val bundle = Bundle()
+        bundle.putSerializable("User",user)
+        frag.arguments = bundle*//*
+        val fragment = supportFragmentManager.beginTransaction()
+        fragment.replace(R.id.fragment_container, frag).commit()
+    }*/
 
 }
