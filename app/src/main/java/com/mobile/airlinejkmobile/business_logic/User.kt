@@ -32,6 +32,24 @@ class User : Serializable{
         this.isAdmin = isAdmin
     }
 
+    internal constructor(username:String, name:String, lastName:String,
+                         email:String, dateOfBirth:String, address:String, workphone:String, cellphone:String){
+        this.username = username
+        this.password = ""
+        this.name = name
+        var lNameA = lastName.split(" ")
+        this.lastName = lNameA[0]
+        this.lastName2 = lNameA[1]
+        this.email = email
+        var dOfBA = dateOfBirth.split("T")
+        this.dateOfBirth = dOfBA[0]
+        this.address = address
+        this.workphone = workphone
+        this.cellphone = cellphone
+        this.isAdmin = 0
+
+    }
+
     internal constructor(){
     }
 }

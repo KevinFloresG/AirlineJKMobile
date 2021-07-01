@@ -1,5 +1,6 @@
 package com.mobile.airlinejkmobile.business_logic
 
+import org.json.JSONObject
 import java.util.ArrayList
 
 object Model {
@@ -85,6 +86,15 @@ object Model {
 
             }
         }
+    }
+
+    fun setCurrentUserFromJSON(uJ: JSONObject){
+
+        currentUser = User(uJ.getString("username"),uJ.getString("name"),
+            uJ.getString("lastname"),uJ.getString("email"),
+            uJ.getString("dateOfBirth"),uJ.getString("address"),
+            uJ.getString("workphone"), uJ.getString("cellphone")
+        )
     }
 
 

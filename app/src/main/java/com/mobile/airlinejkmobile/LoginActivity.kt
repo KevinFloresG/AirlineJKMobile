@@ -1,19 +1,21 @@
 package com.mobile.airlinejkmobile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import com.mobile.airlinejkmobile.business_logic.Model
+import androidx.appcompat.app.AppCompatActivity
 import com.mobile.airlinejkmobile.databinding.ActivityLoginBinding
-import com.mobile.airlinejkmobile.databinding.NavigationDrawerHeaderBinding
+import org.json.JSONObject
+import java.io.DataOutputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityLoginBinding
+    private var jUser: JSONObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +51,13 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-
-            val i = Intent(this, MainActivity::class.java)
-            val userToLogIn = Model.login(username,password)
+            // Verify user credentials with a request to the server
+            jUser = verifyCredentials(username)
 
             // Deny access if the user does not exist or if the password is wrong
-            if(userToLogIn == null){
+            if(jUser?.getString("username")  == "" || jUser == null
+                || jUser?.getString("password") != password
+                    || jUser?.getInt("isAdmin") != 0) {
                 Toast.makeText(
                     this,
                     "El usuario no existe o la clave es incorrecta.",
@@ -63,8 +66,10 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
+            val i = Intent(this, MainActivity::class.java)
+
             // Set logged user as an extra in the intent and start MainActivity
-            i.putExtra("User",userToLogIn)
+            i.putExtra("User",jUser.toString())
             startActivity(i)
         })
 
@@ -76,5 +81,46 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "$msg", Toast.LENGTH_LONG).show()
         }
 
+    }
+
+    fun verifyCredentials(id: String): JSONObject? {
+        var json: JSONObject? = null
+        val thread = Thread {
+            var apiUrl = "http://192.168.0.2:8088/AirlineJK/users/get"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?id=$id"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+
+                json = JSONObject(current)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
     }
 }

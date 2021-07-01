@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.mobile.airlinejkmobile.databinding.ActivityLoginBinding
 import com.mobile.airlinejkmobile.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {

@@ -18,6 +18,7 @@ import com.mobile.airlinejkmobile.databinding.NavigationDrawerHeaderBinding
 import com.mobile.airlinejkmobile.fragments.*
 import com.mobile.airlinejkmobile.recycler_views.recyclers.FlightsRecyclerFragment
 import com.mobile.airlinejkmobile.recycler_views.recyclers.ReservationsRecyclerView
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,12 +29,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bundle = intent.extras
-        user =  bundle!!.getSerializable("User") as User
-        Model.currentUser = user
+        var userString =  bundle!!.getString("User")
+        var uJ  = JSONObject(userString)
+        Model.setCurrentUserFromJSON(uJ)
+        user = Model.currentUser!!
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = NavigationDrawerHeaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         // Show Welcome Message to User
         Toast.makeText(
