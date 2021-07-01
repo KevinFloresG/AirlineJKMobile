@@ -80,10 +80,10 @@ class ReservationsRecyclerView : Fragment(){
         val filteredReservations = ArrayList<Reservation>()
         var route : String
         reservations.forEach{
-            route = it.flight.start + " - " + it.flight.end
+            /*route = it.flight.start + " - " + it.flight.end
             if (route.lowercase().contains(string.lowercase())){
                 filteredReservations.add(it)
-            }
+            }*/
         }
         adapter.updateList(filteredReservations)
     }

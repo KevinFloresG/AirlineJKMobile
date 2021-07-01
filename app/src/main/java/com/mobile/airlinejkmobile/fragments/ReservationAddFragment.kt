@@ -19,6 +19,7 @@ private const val ID = "id"
 private const val START = "start"
 private const val END = "end"
 private const val HOUR = "hour"
+private const val ROUTE = "route"
 private const val DATE = "date"
 private const val DURATION = "duration"
 private const val PRICE = "price"
@@ -36,14 +37,14 @@ class ReservationAddFragment : Fragment() {
     private var price: Double? = null
     private var discount: Double? = null
     private var availableSeats: Int? = null
+    private var route: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idFlight = it.getInt(ID)
-            start = it.getString(START)
-            end = it.getString(END)
             hour = it.getString(HOUR)
+            route = it.getString(ROUTE)
             date = it.getString(DATE)
             duration = it.getString(DURATION)
             price = it.getDouble(PRICE)
@@ -57,8 +58,8 @@ class ReservationAddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_reservation_add, container, false)
-        view.findViewById<TextView>(R.id.route_txt).text = "$start - $end"
-        view.findViewById<TextView>(R.id.discount_txt).text = discount.toString()
+        view.findViewById<TextView>(R.id.route_txt).text = route
+        view.findViewById<TextView>(R.id.discount_txt).text = discount.toString() + "%"
         view.findViewById<TextView>(R.id.duration_txt).text = duration
         view.findViewById<TextView>(R.id.hour_txt).text = hour
         view.findViewById<TextView>(R.id.date_txt).text = date
@@ -104,13 +105,12 @@ class ReservationAddFragment : Fragment() {
             ReservationAddFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ID, flight.id)
-                    putString(START, flight.start)
-                    putString(END, flight.end)
-                    putString(HOUR, flight.hour)
-                    putString(DATE, flight.date)
-                    putString(DURATION, flight.duration)
+                    putString(HOUR, flight.route.schedule.departureTime)
+                    putString(ROUTE, flight.route.id)
+                    putString(DATE, flight.departureDate.split("T")[0])
+                    putString(DURATION, "${flight.route.durationhours}:${flight.route.durationminutes}")
                     putDouble(PRICE, flight.price)
-                    putDouble(DISCOUNT, flight.discount)
+                    putDouble(DISCOUNT, flight.discount * 100)
                     putInt(AVAILABLE_SEATS, flight.availableSeats)
                 }
             }

@@ -4,6 +4,8 @@ import java.util.ArrayList
 
 object Model {
 
+    const val SERVER_IP = "10.0.2.2"
+
     var usersList = ArrayList<User>()
     //var flightsList = ArrayList<Flight>()
     var flights = HashMap<Int, Flight>()
@@ -14,7 +16,7 @@ object Model {
 
     var flightsList = ArrayList<Flight>()
     var currentUser:User? = null
-    init {
+    init {/*
         flights[0] = Flight(0,"CRC","USA","3 horas", 700.0, 0.0, 35, "13/06/2021", "13:00")
         flights[1] = Flight(1,"USA","CRC","3 horas", 700.0, 0.0, 35, "21/06/2021", "14:00")
         flights[2] = Flight(2,"ARG","CAN","4 horas", 300.0, 0.0, 35, "13/06/2021", "10:00")
@@ -28,7 +30,7 @@ object Model {
         flights[10] = Flight(10,"QAT","RUS","1 horas", 100.0, 0.0, 35, "13/06/2021", "21:00")
         flights[11] = Flight(11,"RUS","CRC","10 horas", 1000.0, 0.0, 35, "18/06/2021", "13:00")
         flights[12] = Flight(12,"SRB","QAT","4 horas", 500.0, 0.0, 35, "19/06/2021", "22:00")
-        flights[13] = Flight(13,"SGP","ARG","5 horas", 500.0, 0.0, 35, "25/06/2021", "13:00")
+        flights[13] = Flight(13,"SGP","ARG","5 horas", 500.0, 0.0, 35, "25/06/2021", "13:00")*/
 
         usersList.add(User("1", "1", "Javier","Amador","Delgado",
             "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
