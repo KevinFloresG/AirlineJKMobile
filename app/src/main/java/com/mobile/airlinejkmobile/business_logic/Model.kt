@@ -150,6 +150,52 @@ object Model {
         return  responseCode
     }
 
+
+
+
+    // NUEVO - OBTENER RESERVACION ESPECIFICA POR ID
+
+    fun getReservationByID(id: Int): JSONObject? {
+        var json: JSONObject? = null
+        val thread = Thread {
+            var apiUrl = "http://"+Model.SERVER_IP+":8088/AirlineJK/reservations/get"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?id=$id"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+                json = JSONObject(current)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
+    }
+
 */
 
 
