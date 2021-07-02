@@ -1,15 +1,14 @@
 package com.mobile.airlinejkmobile.fragments
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.style.BackgroundColorSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
 import com.mobile.airlinejkmobile.R
@@ -56,7 +55,14 @@ class EndCheckInFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_end_check_in, container, false)
         printSeats(view, getTicketsByFlight(idF!!))
         connectWebSocket()
+        view.findViewById<Button>(R.id.checkInBtn).setOnClickListener { finish() }
         return view
+    }
+
+    private fun finish(){
+        ws?.send(jsonArr.toString())
+        Toast.makeText(context, "Realizado", Toast.LENGTH_LONG).show()
+        activity?.onBackPressed()
     }
 
     private fun printSeats(view : View, tickets : JSONArray?){
@@ -76,12 +82,14 @@ class EndCheckInFragment : Fragment() {
                 if(tc.text == "X")
                     Toast.makeText(context, "Asiento Ocupado", Toast.LENGTH_LONG).show()
                 else
-                    tc.setOnClickListener { selectSeat(tc.text) }
+                    tc.setOnClickListener { selectSeat(tc, tc.text) }
             }
         }
     }
 
-    fun selectSeat(seat : String){
+    fun selectSeat(tc : TextView, seat : CharSequence){
+
+        tc.setBackgroundColor(Color.parseColor("#2F9F9B"))
         val r = seat[0].digitToInt()
         val c = seat[1].digitToInt()
 
@@ -98,7 +106,11 @@ class EndCheckInFragment : Fragment() {
         ticket.put("flight", flight)
         ticket.put("reservation", reservation)
 
-        jsonArr.put(ticket)
+        val wrapper = JSONObject()
+        wrapper.put("type", "checkin")
+        wrapper.put("content", ticket)
+
+        jsonArr.put(wrapper)
     }
 
     fun getTicketsByFlight(id: Int) : JSONArray?{
