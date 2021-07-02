@@ -11,8 +11,6 @@ import android.widget.TextView
 import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Flight
 
-private const val START = "start"
-private const val END = "end"
 private const val HOUR = "hour"
 private const val ROUTE = "route"
 private const val DATE = "date"
@@ -23,8 +21,6 @@ private const val AVAILABLE_SEATS = "availableSeats"
 
 class FlightDetailFragment : Fragment() {
 
-    //private var start: String? = null
-    //private var end: String? = null
     private var duration: String? = null
     private var hour: String? = null
     private var date: String? = null
@@ -36,8 +32,6 @@ class FlightDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            /*start = it.getString(START)
-            end = it.getString(END)*/
             hour = it.getString(HOUR)
             route = it.getString(ROUTE)
             date = it.getString(DATE)
@@ -72,8 +66,6 @@ class FlightDetailFragment : Fragment() {
         fun newInstance(flight: Flight) =
             FlightDetailFragment().apply {
                 arguments = Bundle().apply {
-                    //putString(START, flight)
-                    //putString(END, flight.end)
                     putString(HOUR, flight.route.schedule.departureTime)
                     putString(ROUTE, flight.route.id)
                     putString(DATE, flight.departureDate.split("T")[0])
