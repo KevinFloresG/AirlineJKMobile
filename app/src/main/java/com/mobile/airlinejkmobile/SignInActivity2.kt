@@ -103,7 +103,7 @@ class SignInActivity2 : AppCompatActivity() {
         var responseCode = ""
         val thread = Thread {
             try {
-                val url = URL("http://192.168.0.2:8088/AirlineJK/users/add")
+                val url = URL("http://10.0.2.2:8088/AirlineJK/users/add")
                 val conn = url.openConnection() as HttpURLConnection
                 conn.requestMethod = "POST"
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
