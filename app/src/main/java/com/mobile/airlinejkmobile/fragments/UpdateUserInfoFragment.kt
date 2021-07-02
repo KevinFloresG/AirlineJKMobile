@@ -1,6 +1,7 @@
 package com.mobile.airlinejkmobile.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,10 @@ import androidx.fragment.app.Fragment
 import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.business_logic.User
+import org.json.JSONObject
+import java.io.DataOutputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class UpdateUserInfoFragment : Fragment() {
@@ -56,7 +61,17 @@ class UpdateUserInfoFragment : Fragment() {
                 user.address = newAddress
                 user.workphone = newWorkphone
                 user.cellphone = newCellphone
-                Model.updateUserInfo(user)
+                var updResponse = updateUserInfo(user.username,newEmail,newAddress,newWorkphone,newCellphone)
+
+                if(updResponse != "200") {
+                    Toast.makeText(
+                        context,
+                        "Debido a un error del servidor no se pudo actualizar la informacion.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@OnClickListener
+                }
+
                 Model.currentUser = user
                 val fragment = activity?.supportFragmentManager?.beginTransaction()
                 fragment?.replace(R.id.fragment_container, frag)?.commit()
@@ -66,6 +81,37 @@ class UpdateUserInfoFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    fun updateUserInfo(username: String, email: String, address: String, workphone: String, cellphone: String) : String{
+        var responseCode = ""
+        val thread = Thread {
+            try {
+                val url = URL("http://"+Model.SERVER_IP+":8088/AirlineJK/users/update/info")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "PUT"
+                conn.setRequestProperty("Content-Type", "application/json")
+                // conn.setRequestProperty("Accept", "application/json")
+                conn.doOutput = true
+                val jsonParam = JSONObject()
+                jsonParam.put("username", username)
+                jsonParam.put("email", email)
+                jsonParam.put("address", address)
+                jsonParam.put("workphone", workphone)
+                jsonParam.put("cellphone", cellphone)
+                val os = DataOutputStream(conn.outputStream)
+                os.writeBytes(jsonParam.toString())
+                os.flush()
+                os.close()
+                responseCode = conn.responseCode.toString()
+                conn.disconnect()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return responseCode
     }
 
 

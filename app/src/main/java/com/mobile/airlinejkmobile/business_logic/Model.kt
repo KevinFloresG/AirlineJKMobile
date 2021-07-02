@@ -7,8 +7,6 @@ object Model {
 
     const val SERVER_IP = "10.0.2.2"
 
-    var usersList = ArrayList<User>()
-
     var flights = HashMap<Int, Flight>()
 
     var reservationId = 0
@@ -18,19 +16,6 @@ object Model {
 
     var currentUser:User? = null
 
-
-    // PENDIENTE CAMBIARLO - JAVIER
-    fun updateUserInfo(user: User){
-        for(u: User in usersList!!){
-            if(u.username == user.username){
-                u.email = user.email
-                u.address = user.address
-                u.workphone = user.workphone
-                u.cellphone = user.cellphone
-
-            }
-        }
-    }
 
     fun setCurrentUserFromJSON(uJ: JSONObject){
 
@@ -165,6 +150,52 @@ object Model {
         thread.start()
         thread.join()
         return  responseCode
+    }
+
+
+
+
+    // NUEVO - OBTENER RESERVACION ESPECIFICA POR ID
+
+    fun getReservationByID(id: Int): JSONObject? {
+        var json: JSONObject? = null
+        val thread = Thread {
+            var apiUrl = "http://"+Model.SERVER_IP+":8088/AirlineJK/reservations/get"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?id=$id"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+                json = JSONObject(current)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
     }
 
 */

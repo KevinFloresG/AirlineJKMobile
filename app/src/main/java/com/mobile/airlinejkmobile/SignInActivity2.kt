@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.databinding.ActivitySignIn2Binding
 import org.json.JSONObject
 import java.io.DataOutputStream
@@ -103,7 +104,7 @@ class SignInActivity2 : AppCompatActivity() {
         var responseCode = ""
         val thread = Thread {
             try {
-                val url = URL("http://10.0.2.2:8088/AirlineJK/users/add")
+                val url = URL("http://"+Model.SERVER_IP+":8088/AirlineJK/users/add")
                 val conn = url.openConnection() as HttpURLConnection
                 conn.requestMethod = "POST"
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
@@ -139,7 +140,7 @@ class SignInActivity2 : AppCompatActivity() {
     fun getUserByUsername(id: String): JSONObject? {
         var json: JSONObject? = null
         val thread = Thread {
-            var apiUrl = "http://10.0.2.2:8088/AirlineJK/users/get"
+            var apiUrl = "http://"+ Model.SERVER_IP+":8088/AirlineJK/users/get"
             var current = ""
             val url: URL
             var urlConnection: HttpURLConnection? = null
