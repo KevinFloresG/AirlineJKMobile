@@ -8,74 +8,16 @@ object Model {
     const val SERVER_IP = "10.0.2.2"
 
     var usersList = ArrayList<User>()
-    //var flightsList = ArrayList<Flight>()
+
     var flights = HashMap<Int, Flight>()
-    //var reservations = HashMap<Int, Reservation>()
+
     var reservationId = 0
     var reservations = ArrayList<Reservation>()
 
-
-    var flightsList = ArrayList<Flight>()
     var currentUser:User? = null
-    init {/*
-        flights[0] = Flight(0,"CRC","USA","3 horas", 700.0, 0.0, 35, "13/06/2021", "13:00")
-        flights[1] = Flight(1,"USA","CRC","3 horas", 700.0, 0.0, 35, "21/06/2021", "14:00")
-        flights[2] = Flight(2,"ARG","CAN","4 horas", 300.0, 0.0, 35, "13/06/2021", "10:00")
-        flights[3] = Flight(3,"CAN","CHL","4 horas", 400.0, 0.0, 35, "22/06/2021", "13:00")
-        flights[4] = Flight(4,"CHL","CRC","2 horas", 200.0, 0.0, 35, "13/06/2021", "09:00")
-        flights[5] = Flight(5,"CRC","CHN","26 horas", 2000.0, 0.0, 35, "13/06/2021", "16:00")
-        flights[6] = Flight(6,"CHN","PER","25 horas", 2000.0, 0.0, 35, "14/06/2021", "17:00")
-        flights[7] = Flight(7,"PER","POL","8 horas", 600.0, 0.0, 35,"15/06/2021", "13:00")
-        flights[8] = Flight(8,"POL","PRI","8 horas", 600.0, 0.0, 35, "16/06/2021", "10:00")
-        flights[9] = Flight(9,"PRI","RUS","10 horas", 1000.0, 0.0, 35, "17/06/2021", "13:00")
-        flights[10] = Flight(10,"QAT","RUS","1 horas", 100.0, 0.0, 35, "13/06/2021", "21:00")
-        flights[11] = Flight(11,"RUS","CRC","10 horas", 1000.0, 0.0, 35, "18/06/2021", "13:00")
-        flights[12] = Flight(12,"SRB","QAT","4 horas", 500.0, 0.0, 35, "19/06/2021", "22:00")
-        flights[13] = Flight(13,"SGP","ARG","5 horas", 500.0, 0.0, 35, "25/06/2021", "13:00")*/
 
-        usersList.add(User("1", "1", "Javier","Amador","Delgado",
-            "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
 
-        usersList.add(User("java123", "123", "Javier","Amador","Delgado",
-            "java64@gmail.com", "2000-05-30","San Jose","2222-2222","8611-7062",0))
-
-        usersList.add(User("kevfg", "321", "Kevin","Flores","Garcia",
-            "kevfg@gmail.com", "1999-02-19","Puntarenas","2154-2465","8312-7534",0))
-
-        usersList.add(User("albert1", "111111", "Alberto","Achio","Morales",
-            "aacmora@gmail.com", "1990-04-24","Guanacaste","2356-0142","6242-2634",0))
-
-        usersList.add(User("ngray", "00000", "Nolan","Grayson","N/A",
-            "naminmo@gmail.com", "1970-07-03","","4356-0142","6242-2634",0))
-
-    }
-
-    fun getUsers(): ArrayList<User> {
-        return usersList
-    }
-
-    fun addUser(s : User){
-        usersList.add(s)
-    }
-
-    fun login(username: String?, password: String?): User? {
-        for(u: User in usersList){
-            if(u.username == username && u.password == password && u.isAdmin == 0){
-                return u
-            }
-        }
-        return null
-    }
-
-    fun getUserByUsername(username: String?): User? {
-        for(u: User in usersList){
-            if(u.username == username){
-                return u
-            }
-        }
-        return null
-    }
-
+    // PENDIENTE CAMBIARLO - JAVIER
     fun updateUserInfo(user: User){
         for(u: User in usersList!!){
             if(u.username == user.username){
@@ -96,7 +38,134 @@ object Model {
             uJ.getString("workphone"), uJ.getString("cellphone")
         )
     }
+// METODOS QUE OCUPA KEVIN PARA RESERVACIONES
+    /*
 
+     // Para insertar una reservacion - Devuelve el status code de la respuesta
+ fun postReservation() : String{ // CAMBIAR DATOS QUEMADOS A REALES
+        var responseCode = ""
+        val thread = Thread {
+            try {
+                val url = URL("http://10.0.2.2:8088/AirlineJK/reservations/add")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "POST"
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
+                conn.setRequestProperty("Accept", "application/json")
+                conn.doOutput = true
+
+                // Se arma el usuario
+                val jsonUser = JSONObject()
+                jsonUser.put("username","321") // Solo se ocupa el username
+
+                // Se arma el tipo de pago (Que para móvil va a ser quemado a menos que se haga un select en algún lado)
+                val jsonPType = JSONObject()
+                jsonPType.put("code","CR")
+
+                val jsonReservation = JSONObject()
+                jsonReservation.put("user",jsonUser)
+                jsonReservation.put("typeOfPayment",jsonPType)
+                jsonReservation.put("seatQuantity", 1) // Aqui iria la cantidad de asientos
+                jsonReservation.put("flightId",1) // Aqui el id del vuelo. OJO ! Esto no es referencia
+                // a la tabla de vuelos, es solo un int para tener el valor a mano facilmente
+
+                jsonReservation.put("flightInfo", "CRC-USA 14/05/2021 10:00 am") // Esto es solo un string para poner
+                // un poco de información del vuelo sin ocupar tener una referencia a esa tabla
+
+                jsonReservation.put("airplane", "BAD1315") // Esto es un string para poner
+                // que el id del avión del vuelo, no es una referencia a la tabla, solo por facilidad
+
+                jsonReservation.put("totalPrice", 15000.00) // Aqui va el precio total a pagar
+
+                val os = DataOutputStream(conn.outputStream)
+                os.writeBytes(jsonReservation.toString()) // Aqui se pasa la vara como un string JSON
+                os.flush()
+                os.close()
+                responseCode = conn.responseCode.toString()
+                conn.disconnect()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return responseCode
+    }
+
+	// Devuelve un JSONArray con las reservaciones hechas por el usuario, recibe el username como string
+	fun getReservationsMadeByUser(username: String) : JSONArray?{
+        var json: JSONArray? = null
+        val thread = Thread {
+            var apiUrl = "http://10.0.2.2:8088/AirlineJK/reservations/get/user"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?username=$username"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+
+                json = JSONArray(current)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
+    }
+
+	// Actualiza la cantidad de asientos que ya se reservaron de una reserva. Devuelve el status code de la respuesta
+	fun updateReservationCheckedInSeats(id: Int, newCheckedInQ: Int) : String{
+        var responseCode = ""
+        val thread = Thread {
+            try {
+                val url = URL("http://10.0.2.2:8088/AirlineJK/reservations/update")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "PUT"
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
+                conn.setRequestProperty("Accept", "application/json")
+                conn.doOutput = true
+
+                // Se arma el usuario
+                val json = JSONObject()
+                json.put("id",id) // Id de la reservacion
+                json.put("checkedInQuantity",newCheckedInQ) // Nueva cantidad de asientos ya reservados
+
+                val os = DataOutputStream(conn.outputStream)
+                os.writeBytes(json.toString())
+                os.flush()
+                os.close()
+                responseCode = conn.responseCode.toString()
+                conn.disconnect()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return  responseCode
+    }
+
+*/
 
 
 }
