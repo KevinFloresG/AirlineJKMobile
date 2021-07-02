@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.databinding.ActivityLoginBinding
 import org.json.JSONObject
 import java.io.DataOutputStream
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
     fun verifyCredentials(id: String): JSONObject? {
         var json: JSONObject? = null
         val thread = Thread {
-            var apiUrl = "http://10.0.2.2:8088/AirlineJK/users/get"
+            var apiUrl = "http://"+ Model.SERVER_IP+":8088/AirlineJK/users/get"
             var current = ""
 
             val url: URL
