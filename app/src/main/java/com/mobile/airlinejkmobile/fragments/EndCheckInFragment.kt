@@ -54,7 +54,7 @@ class EndCheckInFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_end_check_in, container, false)
         printSeats(view, getTicketsByFlight(idF!!))
-        connectWebSocket()
+        connectWebSocket(view)
         view.findViewById<Button>(R.id.checkInBtn).setOnClickListener { finish() }
         return view
     }
@@ -80,7 +80,9 @@ class EndCheckInFragment : Fragment() {
             for(x in 0..5){
                 var tc : TextView = tr.getChildAt(x) as TextView
                 if(tc.text == "X")
-                    Toast.makeText(context, "Asiento Ocupado", Toast.LENGTH_LONG).show()
+                    tc.setOnClickListener {
+                        Toast.makeText(context, "Asiento Ocupado", Toast.LENGTH_LONG).show()
+                    }
                 else
                     tc.setOnClickListener { selectSeat(tc, tc.text) }
             }
@@ -154,7 +156,7 @@ class EndCheckInFragment : Fragment() {
         return json
     }
 
-    private fun connectWebSocket() {
+    private fun connectWebSocket(view : View) {
         val uri: URI
         try {
             uri = URI("ws://${Model.SERVER_IP}:8088/AirlineJK/ticket")
@@ -167,7 +169,21 @@ class EndCheckInFragment : Fragment() {
                 val obj = JSONObject(s)
                 val content = obj.getString("content")
                 when(obj.get("type")){
-                    "update" -> {
+                    "checkin" -> {
+                        data class Ticket(var rowN : Int, var columnN : Int)
+                        val list = Klaxon().parseArray<Ticket>(content)
+                        val table = view.findViewById<TableLayout>(R.id.tlayt)
+                        var tr : TableRow
+                        for(t in list!!){
+                            activity?.runOnUiThread {
+                            tr = table.getChildAt(t.rowN) as TableRow
+                            var tc : TextView = tr.getChildAt(t.columnN) as TextView
+                            tc.text = "X"
+                            tc.setOnClickListener {
+                                Toast.makeText(context, "Asiento Ocupado", Toast.LENGTH_LONG).show()
+                            }
+                            }
+                        }
 
                     }
                 }
