@@ -260,7 +260,6 @@ object Model {
                         var route = Route("",0,0,schedule)
                         var flight = Flight(0,0.0,
                             0.0,1,"",route)
-                        data class Schedule(var departureTime : String)
                         var res = Reservation(item.getInt("id"), flight,item.getInt("seatQuantity"),
                         item.getInt("checkedInQuantity"),item.getString("flightInfo"),
                             currentUser!!,item.getDouble("totalPrice"),"", Paymenttypes("CR")
@@ -312,5 +311,7 @@ object Model {
         thread.join()
         return json
     }
+
+
 
 }

@@ -15,7 +15,7 @@ data class Reservation(
     var id : Int,
     var flightId : Flight,
     var seatQuantity : Int,
-    var checkInQuantity : Int,
+    var checkedInQuantity : Int,
     var flightInfo : String,
     var user : User,
     var totalPrice : Double,
