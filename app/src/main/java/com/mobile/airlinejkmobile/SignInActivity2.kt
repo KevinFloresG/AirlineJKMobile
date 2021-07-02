@@ -139,7 +139,7 @@ class SignInActivity2 : AppCompatActivity() {
     fun getUserByUsername(id: String): JSONObject? {
         var json: JSONObject? = null
         val thread = Thread {
-            var apiUrl = "http://192.168.0.2:8088/AirlineJK/users/get"
+            var apiUrl = "http://10.0.2.2:8088/AirlineJK/users/get"
             var current = ""
             val url: URL
             var urlConnection: HttpURLConnection? = null
