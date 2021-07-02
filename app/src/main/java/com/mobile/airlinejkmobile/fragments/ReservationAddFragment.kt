@@ -29,8 +29,6 @@ private const val AVAILABLE_SEATS = "availableSeats"
 class ReservationAddFragment : Fragment() {
 
     private var idFlight : Int? = null
-    private var start: String? = null
-    private var end: String? = null
     private var duration: String? = null
     private var hour: String? = null
     private var date: String? = null
