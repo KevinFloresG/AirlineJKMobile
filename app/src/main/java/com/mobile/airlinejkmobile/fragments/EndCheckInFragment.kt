@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import com.beust.klaxon.Klaxon
 import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Flight
@@ -48,15 +51,22 @@ class EndCheckInFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_end_check_in, container, false)
-        printSeats(getTicketsByFlight(idF!!))
+        printSeats(view, getTicketsByFlight(idF!!))
         //connectWebSocket()
         return view
     }
 
-    private fun printSeats(tickets : JSONArray?){
+    private fun printSeats(view : View, tickets : JSONArray?){
         data class Ticket(var rowN : Int, var columnN : Int)
         val list = Klaxon().parseArray<Ticket>(tickets.toString())
-        Log.d("listaaaaa", list.toString())
+        val table = view.findViewById<TableLayout>(R.id.tlayt)
+        var tr : TableRow
+        var tc : TextView
+        for(t in list!!){
+            tr = table.getChildAt(t.rowN) as TableRow
+            tc = tr.getChildAt(t.columnN) as TextView
+            tc.text = "ocupado"
+        }
     }
 
     fun getTicketsByFlight(id: Int) : JSONArray?{

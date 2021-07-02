@@ -8,6 +8,7 @@
     tools:context=".fragments.EndCheckInFragment">
 
     <TableLayout
+        android:id="@+id/tlayt"
         android:layout_width="225dp"
         android:layout_height="330dp"
         android:stretchColumns="1"
