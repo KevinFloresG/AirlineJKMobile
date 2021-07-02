@@ -14,6 +14,8 @@ object Model {
     var reservationId = 0
     var reservations = ArrayList<Reservation>()
 
+    var selectedFlight : Flight ? = null
+
     var currentUser:User? = null
 
 

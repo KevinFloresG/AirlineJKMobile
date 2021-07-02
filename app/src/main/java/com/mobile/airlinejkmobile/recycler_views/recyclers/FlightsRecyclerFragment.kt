@@ -3,13 +3,12 @@ package com.mobile.airlinejkmobile.recycler_views.recyclers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +22,7 @@ import com.mobile.airlinejkmobile.recycler_views.recycler_adapters.FlightsRecycl
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.handshake.ServerHandshake
 import org.json.JSONObject
+import java.io.Serializable
 import java.net.URI
 import java.net.URISyntaxException
 
@@ -113,7 +113,7 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
             e.printStackTrace()
             return
         }
-        ws = object : WebSocketClient(uri) {
+        ws = object : WebSocketClient(uri), Serializable {
             override fun onMessage(s: String) {
                 val obj = JSONObject(s)
                 val content = obj.getString("content")
@@ -163,6 +163,11 @@ class FlightsRecyclerFragment : Fragment(), FlightsRecyclerViewAdapter.ClickList
             override fun onOpen(serverHandshake: ServerHandshake) {}
         }
         (ws as WebSocketClient).connect()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ws?.close()
     }
 
 }

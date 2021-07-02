@@ -25,7 +25,7 @@ class ReservationsRecyclerViewAdapter(
         /*holder.route.text = f.flight.start + " - " + f.flight.end
         holder.duration.text = "Duración: " + f.flight.duration*/
         holder.price.text = "Precio Total: " + f.totalPrice.toString()
-        holder.seats.text = "Cantidad de Asientos: " + f.seatQ.toString()
+       // holder.seats.text = "Cantidad de Asientos: " + f.seatQ.toString()
     }
 
     override fun getItemCount(): Int {

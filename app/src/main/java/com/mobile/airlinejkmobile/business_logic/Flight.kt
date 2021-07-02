@@ -17,3 +17,5 @@ data class Flight(
     var departureDate: String,
     var route : Route
 )
+
+data class FlightSeats(var id : Int, var availableSeats: Int)
