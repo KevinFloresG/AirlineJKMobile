@@ -36,7 +36,7 @@ class EndCheckInFragment : Fragment() {
     private var idF: Int? = null
     private var sQ: Int? = null
     private var ws: WebSocketClient? = null
-    private var jsonArr = JSONArray()
+    private var jsonArr = JSONObject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,11 +108,15 @@ class EndCheckInFragment : Fragment() {
         ticket.put("flight", flight)
         ticket.put("reservation", reservation)
 
+        val tickets = JSONArray()
+        tickets.put(ticket)
+
         val wrapper = JSONObject()
         wrapper.put("type", "checkin")
-        wrapper.put("content", ticket)
+        wrapper.put("content", tickets.toString())
 
-        jsonArr.put(wrapper)
+        jsonArr = wrapper
+        Log.d("JSONA",jsonArr.toString())
     }
 
     fun getTicketsByFlight(id: Int) : JSONArray?{
