@@ -10,6 +10,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
+import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
 import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Flight
@@ -36,6 +37,7 @@ class EndCheckInFragment : Fragment() {
     private var idF: Int? = null
     private var sQ: Int? = null
     private var ws: WebSocketClient? = null
+    private var jsonArr = JSONArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +55,7 @@ class EndCheckInFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_end_check_in, container, false)
         printSeats(view, getTicketsByFlight(idF!!))
-        //connectWebSocket()
+        connectWebSocket()
         return view
     }
 
@@ -62,15 +64,41 @@ class EndCheckInFragment : Fragment() {
         val list = Klaxon().parseArray<Ticket>(tickets.toString())
         val table = view.findViewById<TableLayout>(R.id.tlayt)
         var tr : TableRow
-        var tc : TextView
         for(t in list!!){
             tr = table.getChildAt(t.rowN) as TableRow
-            tc = tr.getChildAt(t.columnN) as TextView
+            var tc : TextView = tr.getChildAt(t.columnN) as TextView
             tc.text = "X"
-            tc.setOnClickListener {
-                tc.text = "PPP"
+        }
+        for(i in 0..5){
+            tr = table.getChildAt(i) as TableRow
+            for(x in 0..5){
+                var tc : TextView = tr.getChildAt(x) as TextView
+                if(tc.text == "X")
+                    Toast.makeText(context, "Asiento Ocupado", Toast.LENGTH_LONG).show()
+                else
+                    tc.setOnClickListener { selectSeat(tc.text) }
             }
         }
+    }
+
+    fun selectSeat(seat : String){
+        val r = seat[0].digitToInt()
+        val c = seat[1].digitToInt()
+
+        val reservation = JSONObject()
+        reservation.put("id",idR)
+
+        val flight = JSONObject()
+        flight.put("id", idF)
+
+        val ticket = JSONObject()
+        ticket.put("rowN", r)
+        ticket.put("columnN", c)
+        ticket.put("owner", Model.currentUser?.name)
+        ticket.put("flight", flight)
+        ticket.put("reservation", reservation)
+
+        jsonArr.put(ticket)
     }
 
     fun getTicketsByFlight(id: Int) : JSONArray?{
