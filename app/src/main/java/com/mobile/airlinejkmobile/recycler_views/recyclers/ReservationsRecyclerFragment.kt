@@ -16,8 +16,9 @@ import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Reservation
 import com.mobile.airlinejkmobile.business_logic.Model
 import com.mobile.airlinejkmobile.recycler_views.recycler_adapters.ReservationsRecyclerViewAdapter
+import org.json.JSONArray
 
-class ReservationsRecyclerView : Fragment(){
+class ReservationsRecyclerView : Fragment(), ReservationsRecyclerViewAdapter.ClickListener{
 
     private lateinit var adapter: ReservationsRecyclerViewAdapter
     private val reservations: ArrayList<Reservation> = Model.reservations
@@ -34,7 +35,7 @@ class ReservationsRecyclerView : Fragment(){
     private fun initRecycler(view: View){
         val recycler = view.findViewById<RecyclerView>(R.id.recycler_reservations)
         recycler.layoutManager = LinearLayoutManager(activity)
-        adapter = ReservationsRecyclerViewAdapter(reservations)
+        adapter = ReservationsRecyclerViewAdapter(reservations,this)
         recycler.adapter = adapter
 
         val search = view.findViewById<EditText>(R.id.search_reservations)
@@ -86,6 +87,38 @@ class ReservationsRecyclerView : Fragment(){
             }*/
         }
         adapter.updateList(filteredReservations)
+    }
+
+    override fun onItemClick(res: Reservation) {
+        var tickets: JSONArray? = Model.getTicketsByReservation(res.id)
+
+        if (tickets?.length() == 0) {
+            val myBuilder = AlertDialog.Builder(activity)
+            val nebulae = arrayOf<CharSequence>("Aún no ha realizado el Check In.")
+            myBuilder.setTitle("NO HAY TIQUETES DE LA RESERVA")
+                .setItems(nebulae) { dialogInterface, position -> {} }
+            var myDialog = myBuilder.create()
+            myDialog.show()
+        } else
+            if (tickets?.length() != 0) {
+                val myBuilder = AlertDialog.Builder(activity)
+                var ticketList = Array<CharSequence>(tickets?.length()!!) { "" }
+
+                for (i in 0 until tickets?.length()!!) {
+                    val item = tickets.getJSONObject(i)
+                    ticketList[i] =
+                        "Tiquete #" + (i + 1) + " [ ID: " + item.getInt("id") + ", Columna: " + item.getInt(
+                            "columnN"
+                        ) + ", Fila: " + item.getInt("rowN") + " ]"
+                }
+
+                myBuilder.setTitle("TIQUETES DE LA RESERVA")
+                    .setItems(ticketList) { dialogInterface, position -> {} }
+
+                var myDialog = myBuilder.create()
+                myDialog.show()
+            }
+
     }
 
 }

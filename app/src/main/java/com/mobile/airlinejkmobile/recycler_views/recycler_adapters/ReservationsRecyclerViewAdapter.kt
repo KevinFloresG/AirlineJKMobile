@@ -10,7 +10,8 @@ import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Reservation
 
 class ReservationsRecyclerViewAdapter(
-    private var reservations: List<Reservation>
+    private var reservations: List<Reservation>,
+    private val clickListener: ClickListener
 ) : RecyclerView.Adapter<ReservationsRecyclerViewAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -22,10 +23,17 @@ class ReservationsRecyclerViewAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val f = reservations[position]
-        /*holder.route.text = f.flight.start + " - " + f.flight.end
-        holder.duration.text = "Duración: " + f.flight.duration*/
+        holder.route.text = ""+ f.id +" - "+f.flightInfo
+        //holder.duration.text = "Duración: " + f.flight.duration
+
         holder.price.text = "Precio Total: " + f.totalPrice.toString()
        // holder.seats.text = "Cantidad de Asientos: " + f.seatQ.toString()
+
+        holder.seats.text = "Cantidad de Asientos: " + f.seatQuantity.toString()
+        holder.itemView.setOnClickListener {
+            clickListener.onItemClick(f)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -39,9 +47,12 @@ class ReservationsRecyclerViewAdapter(
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val route: TextView = view.findViewById(R.id.flight)
-        val duration: TextView = view.findViewById(R.id.flight_duration)
         val price: TextView = view.findViewById(R.id.total_price)
         val seats: TextView = view.findViewById(R.id.reserved_seats)
+    }
+
+    interface ClickListener{
+        fun onItemClick(res: Reservation)
     }
 
 }

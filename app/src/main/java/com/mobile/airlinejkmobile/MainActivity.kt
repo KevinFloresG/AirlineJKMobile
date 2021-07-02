@@ -76,7 +76,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.profile -> changeFragment("Perfil", ProfileFragment(), "")
             R.id.flights_offer -> changeFragment("Vuelos en Oferta", FlightsOfferFragment(),"")
             R.id.flights -> changeFragment("Vuelos", FlightsRecyclerFragment(), "recycler_flights")
-            R.id.reservations ->changeFragment("Reservaciones", ReservationsRecyclerView(),"")
+            R.id.reservations ->{
+                Model.setUserReservations()
+                changeFragment("Reservaciones", ReservationsRecyclerView(),"")
+            }
             R.id.checkIn -> changeFragment("Check In", CheckInFragment(),"")
             R.id.logOut -> logOut()
             else -> return false

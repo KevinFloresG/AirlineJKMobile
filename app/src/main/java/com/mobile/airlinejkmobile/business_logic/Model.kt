@@ -1,6 +1,11 @@
 package com.mobile.airlinejkmobile.business_logic
 
+import org.json.JSONArray
 import org.json.JSONObject
+import java.io.DataOutputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.ArrayList
 
 object Model {
@@ -200,5 +205,110 @@ object Model {
 
 */
 
+    fun getReservationsMadeByUser(username: String) : JSONArray?{
+        var json: JSONArray? = null
+        val thread = Thread {
+            var apiUrl = "http://$SERVER_IP:8088/AirlineJK/reservations/get/user"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?username=$username"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+
+                json = JSONArray(current)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
+    }
+
+    fun setUserReservations() {
+        reservations = ArrayList<Reservation>()
+
+        var uReservations: JSONArray? = getReservationsMadeByUser(currentUser?.username!!)
+        if(uReservations != null)
+            if(uReservations?.length() != 0){
+                for (i in 0 until uReservations?.length()!!) {
+                    val item = uReservations.getJSONObject(i)
+                    if(item.getInt("id") >= 1){
+                        var schedule = Schedule("")
+                        var route = Route("",0,0,schedule)
+                        var flight = Flight(0,0.0,
+                            0.0,1,"",route)
+                        data class Schedule(var departureTime : String)
+                        var res = Reservation(item.getInt("id"), flight,item.getInt("seatQuantity"),
+                        item.getInt("checkedInQuantity"),item.getString("flightInfo"),
+                            currentUser!!,item.getDouble("totalPrice"),"",Paymenttypes("CR"))
+                        reservations.add(res)
+
+                    }
+                }
+            }
+    }
+
+    fun getTicketsByReservation(id: Int) : JSONArray?{
+        var json: JSONArray? = null
+        val thread = Thread {
+            var apiUrl = "http:/$SERVER_IP:8088/AirlineJK/tickets/get/reservation"
+            var current = ""
+
+            val url: URL
+            var urlConnection: HttpURLConnection? = null
+            apiUrl += "?id=$id"
+            try {
+                url = URL(apiUrl)
+                urlConnection = url
+                    .openConnection() as HttpURLConnection
+
+                urlConnection.requestMethod = "GET"
+                urlConnection.doOutput = true
+
+                urlConnection.setRequestProperty("Content-type", "application/json")
+                val outS = urlConnection.outputStream
+                val dOS = DataOutputStream(outS)
+                dOS.flush()
+                dOS.close()
+                val `in` = urlConnection.inputStream
+                val isw = InputStreamReader(`in`)
+                var data = isw.read()
+                while (data != -1) {
+                    current += data.toChar()
+                    data = isw.read()
+                    print(current)
+                }
+
+                json = JSONArray(current)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        thread.start()
+        thread.join()
+        return json
+    }
 
 }
