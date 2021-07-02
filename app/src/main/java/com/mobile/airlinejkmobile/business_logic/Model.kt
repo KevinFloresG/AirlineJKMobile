@@ -11,6 +11,7 @@ import java.util.ArrayList
 object Model {
 
     const val SERVER_IP = "10.0.2.2"
+    //const val SERVER_IP = "192.168.0.2" // IP de la red de Javier
 
     var flights = HashMap<Int, Flight>()
 
@@ -262,7 +263,8 @@ object Model {
                         data class Schedule(var departureTime : String)
                         var res = Reservation(item.getInt("id"), flight,item.getInt("seatQuantity"),
                         item.getInt("checkedInQuantity"),item.getString("flightInfo"),
-                            currentUser!!,item.getDouble("totalPrice"),"",Paymenttypes("CR"))
+                            currentUser!!,item.getDouble("totalPrice"),"", Paymenttypes("CR")
+                        )
                         reservations.add(res)
 
                     }
