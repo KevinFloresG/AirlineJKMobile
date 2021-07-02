@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dip"
+    android:paddingBottom="5dip"
     tools:context=".fragments.EndCheckInFragment">
 
     <TableLayout
         android:id="@+id/tlayt"
-        android:layout_width="225dp"
-        android:layout_height="330dp"
+        android:layout_width="223dp"
+        android:layout_height="182dp"
         android:stretchColumns="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,52 +22,296 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <TextView
-
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="00" />
 
             <TextView
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="01" />
 
             <TextView
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="3"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="02" />
 
             <TextView
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="4"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="03" />
 
             <TextView
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="5"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="04" />
 
             <TextView
                 android:layout_width="37.5dp"
                 android:layout_height="match_parent"
                 android:layout_column="6"
                 android:gravity="center"
-                android:text="A1" />
+                android:text="05" />
+        </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="10" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="11" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="12" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="13" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="14" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="15" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="20" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="21" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="22" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="23" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="24" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="25" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="30" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="31" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="32" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="33" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="34" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="35" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="40" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="41" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="42" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="43" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="44" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="45" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="50" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="51" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="52" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="53" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="54" />
+
+            <TextView
+                android:layout_width="37.5dp"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="55" />
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

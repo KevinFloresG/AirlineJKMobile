@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import com.beust.klaxon.Klaxon
 import com.mobile.airlinejkmobile.R
 import com.mobile.airlinejkmobile.business_logic.Flight
@@ -65,7 +66,10 @@ class EndCheckInFragment : Fragment() {
         for(t in list!!){
             tr = table.getChildAt(t.rowN) as TableRow
             tc = tr.getChildAt(t.columnN) as TextView
-            tc.text = "ocupado"
+            tc.text = "X"
+            tc.setOnClickListener {
+                tc.text = "PPP"
+            }
         }
     }
 
