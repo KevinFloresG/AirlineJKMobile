@@ -7,8 +7,6 @@ object Model {
 
     const val SERVER_IP = "10.0.2.2"
 
-    var usersList = ArrayList<User>()
-
     var flights = HashMap<Int, Flight>()
 
     var reservationId = 0
@@ -16,19 +14,6 @@ object Model {
 
     var currentUser:User? = null
 
-
-    // PENDIENTE CAMBIARLO - JAVIER
-    fun updateUserInfo(user: User){
-        for(u: User in usersList!!){
-            if(u.username == user.username){
-                u.email = user.email
-                u.address = user.address
-                u.workphone = user.workphone
-                u.cellphone = user.cellphone
-
-            }
-        }
-    }
 
     fun setCurrentUserFromJSON(uJ: JSONObject){
 
